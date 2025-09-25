@@ -1,0 +1,83 @@
+<odoo>
+  <!-- Vista en modo árbol para las Cajas -->
+  <record id="view_cash_box_tree" model="ir.ui.view">
+    <field name="name">cash.box.tree</field>
+    <field name="model">cash.control.box</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name" string="Caja"/>
+        <field name="current_balance" string="Saldo actual"/>
+      </tree>
+    </field>
+  </record>
+
+  <!-- Vista en modo formulario para las Cajas -->
+  <record id="view_cash_box_form" model="ir.ui.view">
+    <field name="name">cash.box.form</field>
+    <field name="model">cash.control.box</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <group>
+            <field name="name" string="Caja"/>
+            <field name="current_balance" readonly="1" string="Saldo actual"/>
+          </group>
+          <notebook>
+            <page string="Movimientos de cajas">
+              <!-- Relación One2many a cash.control.movement -->
+              <field name="movement_ids"
+                     widget="one2many_list"
+                     context="{'form_view_ref': 'cash_control.view_cash_movement_form'}"
+                     options="{'mode': 'dialog'}">
+                <tree>
+                  <!-- Vista árbol: se agrega target_bank_id para visualización -->
+                  <field name="name" string="Secuencia" readonly="1"/>
+                  <field name="date" string="Fecha y hora"/>
+                  <field name="type" string="Tipo de movimiento"/>
+                  <field name="signed_amount" string="Monto"/>
+                  <field name="responsible_id" string="Responsable"/>
+                  <field name="notes" string="Notas" optional ="hide"/>
+                  <field name="target_bank_id" string="Banco Destino" optional ="hide"/>
+                </tree>
+                <!-- Formulario emergente para crear/editar movimientos -->
+                <form string="Movimiento de caja">
+                  <sheet>
+                    <group>
+                      <field name="name" string="Secuencia" readonly="1"/>
+                      <field name="date" string="Fecha y hora"/>
+                      <field name="type" string="Tipo de movimiento"/>
+                      <field name="amount" string="Monto"/>
+                      <field name="signed_amount" invisible="1" string="Monto Firmado"/>
+                      <field name="responsible_id" string="Responsable"/>
+                      <field name="notes" string="Notas"/>
+                    </group>
+                      <group>
+                        <!-- Campos de rendición (solo para egreso) -->
+                        <field name="por_rendir" string="Por Rendir" invisible="type != 'egreso'"/>
+                        <field name="monto_rendido" string="Monto rendido" invisible="not por_rendir"/>
+                        <field name="fecha_rendicion" string="Fecha de rendición" invisible="not por_rendir"/>
+                    </group>
+                    <group>
+                      <!-- Se incluye el campo computado para que esté disponible -->
+                      <field name="is_transferencia_banco" invisible="1"/>
+                      <!-- target_bank_id solo se muestra si is_transferencia_banco es True -->
+                      <field name="target_bank_id" string="Banco Destino"
+                             invisible="not is_transferencia_banco"
+                             placeholder="Seleccione el Banco Destino"/>
+                    </group>
+                  </sheet>
+                </form>
+              </field>
+            </page>
+          </notebook>
+        </sheet>
+        <!-- Chatter (seguimiento de mensajes y actividades) -->
+        <div class="oe_chatter">
+          <field name="message_ids" widget="mail_thread"
+                 options="{'res_field': 'message_ids', 'post_refresh': 'frontend'}"/>
+          <field name="message_follower_ids" widget="mail_followers"/>
+        </div>
+      </form>
+    </field>
+  </record>
+</odoo>

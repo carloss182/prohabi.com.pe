@@ -1,0 +1,56 @@
+<odoo>
+        <menuitem id="cash_control_menu"
+                name="Cash Control"
+                web_icon="cash_control,static/description/icon.png"
+                sequence="10"/>
+        
+        <menuitem id="cash_control_menu_movement"
+                name="Movimientos"      
+                parent="cash_control_menu"          
+                sequence="20"/>
+
+        <menuitem id="cash_control_movement_menu"
+                name="Cajas"
+                parent="cash_control_menu_movement"
+                action="cash_control_movement_action"
+                sequence="21"/>
+        
+        <menuitem id="menu_cash_control_bank_movement" 
+                name="Bancos" 
+                parent="cash_control_menu_movement" 
+                action="action_cash_control_bank_movement" 
+                sequence="21"/>
+        
+        <menuitem id="cash_control_menu_registers"
+                name="Registros"      
+                parent="cash_control_menu"          
+                sequence="20"/>
+
+        <menuitem id="cash_control_box_menu"
+                name="Cajas"
+                parent="cash_control_menu_registers"
+                action="cash_control_box_action"
+                sequence="30"/>
+    
+        <!-- Menús para acceder a las acciones -->
+        <menuitem id="menu_cash_control_bank" 
+                name="Bancos" 
+                parent="cash_control_menu_registers" 
+                action="action_cash_control_bank" 
+                sequence="40"/>
+
+        <!-- Menú de Configuraciones (bajo Cash Control) solo para managers -->
+        <menuitem id="cash_control_config_menu"
+                name="Configuraciones"
+                parent="cash_control_menu"
+                sequence="50"/>
+
+        <!-- Submenú para Notificaciones, también solo managers -->
+        <menuitem id="cash_control_notification_menu"
+                name="Notificaciones"
+                parent="cash_control_config_menu"
+                action="cash_control_notification_action"
+                sequence="60"
+                groups="cash_control.group_cash_control_manager"/>
+
+</odoo>

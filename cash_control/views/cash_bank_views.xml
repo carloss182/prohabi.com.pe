@@ -1,0 +1,80 @@
+<odoo>
+  <!-- Vista en árbol para Cuentas Bancarias -->
+  <record id="view_cash_control_bank_tree" model="ir.ui.view">
+    <field name="name">cash.control.bank.tree</field>
+    <field name="model">cash.control.bank</field>
+    <field name="arch" type="xml">
+      <tree string="Cuentas Bancarias">
+        <field name="name"/>
+        <field name="current_balance"/>
+      </tree>
+    </field>
+  </record>
+
+  <!-- Vista en modo formulario para Cuentas Bancarias -->
+  <record id="view_cash_control_bank_form" model="ir.ui.view">
+    <field name="name">cash.control.bank.form</field>
+    <field name="model">cash.control.bank</field>
+    <field name="arch" type="xml">
+      <form string="Cuenta Bancaria">
+        <sheet>
+          <group>
+            <field name="name"/>
+            <field name="current_balance" readonly="1"/>
+          </group>
+          <notebook>
+            <page string="Movimientos">
+              <field name="movement_ids" context="{'default_bank_id': active_id}">
+                <tree string="Movimientos Bancarios">
+                  <field name="date"/>
+                  <field name="type"/>
+                  <!--<field name="amount"/>-->
+                  <field name="signed_amount"/>
+                  <field name="responsible_id"/>
+                </tree>
+                <form string="Movimiento Bancario">
+                  <sheet>
+                    <group>
+                      <field name="name" readonly="1"/>
+                      <field name="bank_id"/>
+                      <field name="date"/>
+                      <field name="type"/>
+                      <field name="amount"/>
+                      <!--<field name="signed_amount" readonly="1"/>-->
+                    </group>
+                    <group>
+                      <field name="responsible_id"/>
+                      <field name="notes"/>
+                    </group>
+                    <!-- Se incluyen los campos computados para que estén disponibles en la vista -->
+                    <group>
+                      <field name="is_transferencia" invisible="1"/>
+                      <field name="is_transferencia_banco" invisible="1"/>
+                    </group>
+                    <!-- Grupo para mostrar target_cash_box_id cuando type sea 'transferencia' -->
+                    <group>
+                      <field name="target_cash_box_id" string="Caja Destino"
+                             invisible="not is_transferencia"
+                             placeholder="Seleccione la Caja Destino"/>
+                    </group>
+                    <!-- Grupo para mostrar target_bank_id cuando type sea 'transferencia_banco' -->
+                    <group>
+                      <field name="target_bank_id" string="Banco Destino"
+                             invisible="not is_transferencia_banco"
+                             placeholder="Seleccione el Banco Destino"/>
+                    </group>
+                  </sheet>
+                </form>
+              </field>
+            </page>
+          </notebook>
+        </sheet>
+        <!-- Chatter: Seguimiento de mensajes y actividades -->
+        <div class="oe_chatter">
+          <field name="message_follower_ids" widget="mail_followers"/>
+          <field name="message_ids" widget="mail_thread"/>
+        </div>
+      </form>
+    </field>
+  </record>
+</odoo>

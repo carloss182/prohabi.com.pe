@@ -1,0 +1,31 @@
+<odoo>
+    <!-- Acción para Caja -->
+    <record id="cash_control_box_action" model="ir.actions.act_window">
+        <field name="name">Cajas</field>
+        <field name="res_model">cash.control.box</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+    </record>
+
+    <!-- Acción para Movimientos -->
+    <record id="cash_control_movement_action" model="ir.actions.act_window">
+        <field name="name">Movimientos de cajas</field>
+        <field name="res_model">cash.control.movement</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+    </record>
+    
+  <!-- Acciones para acceder a las vistas -->
+  <record id="action_cash_control_bank" model="ir.actions.act_window">
+    <field name="name">Cuentas Bancarias</field>
+    <field name="res_model">cash.control.bank</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <record id="action_cash_control_bank_movement" model="ir.actions.act_window">
+    <field name="name">Movimientos bancarios</field>
+    <field name="res_model">cash.control.bank.movement</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+</odoo>

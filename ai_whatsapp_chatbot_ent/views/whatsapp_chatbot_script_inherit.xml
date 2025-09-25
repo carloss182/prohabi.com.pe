@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="open_ai_whatsapp_chatbot_script_inherit" model="ir.ui.view">
+            <field name="name">Open.AI.whatsapp.chatbot.script_inherit</field>
+            <field name="model">whatsapp.chatbot.script</field>
+            <field name="inherit_id" ref="odoo_whatsapp_ent_chatbot.whatsapp_chatbot_script_view_form"/>
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='action_id']" position="after">
+                    <field
+                            name="chatbot_document_ids"
+                            invisible="step_call_type != 'pdf'"
+                            widget='many2many_binary'
+                    />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

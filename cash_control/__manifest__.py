@@ -1,0 +1,23 @@
+{
+    'name': 'CashControl',
+    'version': '17.0.0.0',
+    'depends': ['base', 'contacts', 'mail'],
+    'author': 'Carlos Berrocal',
+    'description': 'Registro de ingresos y egresos de cajas.',
+    'category': 'Tools',
+    'data': [
+        'security/cash_control_security.xml',
+        'security/ir.model.access.csv',
+        'data/ir_sequence_data.xml',
+        'views/actions.xml',
+        'views/cash_box_views.xml',
+        'views/cash_bank_views.xml',
+        'views/bank_movement_views.xml',
+        'views/cash_movement_views.xml',
+        'views/notification_views.xml',
+        'views/menu.xml',
+    ],
+    'images': ['static/description/icon.png'],
+    'installable': True,
+    'application': True,
+}

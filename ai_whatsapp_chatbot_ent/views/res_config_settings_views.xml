@@ -1,0 +1,32 @@
+<odoo>
+    <record id="form_view_res_config_settings" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='languages']" position="after">
+                <block title="Open AI">
+                    <div class="row mt16 o_settings_container">
+                        <setting string="API Key and Model" help="OpenAI API Key and model">
+                            <div class="content-group">
+                                <div class="row mt16">
+                                    <field name="open_ai_model" placeholder="OpenAI Model"/>
+                                </div>
+                                <div class="row mt16">
+                                    <field name="open_ai_api_key" password="True" placeholder="OpenAI API KEY"/>
+                                </div>
+                            </div>
+                        </setting>
+                        <setting string="Max Tokens" help="OpenAI Max Tokens">
+                            <div class="content-group">
+                                <div class="row mt16">
+                                    <field name="open_ai_max_tokens" placeholder="OpenAI Max Tokens"/>
+                                </div>
+                            </div>
+                        </setting>
+                    </div>
+                </block>
+            </xpath>
+        </field>
+    </record>
+</odoo>

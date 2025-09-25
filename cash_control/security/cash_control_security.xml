@@ -1,0 +1,14 @@
+<odoo>
+    <!-- Grupo de usuarios de Cash Control -->
+    <record id="group_cash_control_user" model="res.groups">
+        <field name="name">Cash Control User</field>
+        <field name="comment">Acceso a Cajas y Movimientos, pero no configuraciones.</field>
+    </record>
+
+    <!-- Grupo de managers -->
+    <record id="group_cash_control_manager" model="res.groups">
+        <field name="name">Cash Control Manager</field>
+        <field name="comment">Acceso total (configuraciones incluidas).</field>
+        <field name="implied_ids" eval="[(4, ref('cash_control.group_cash_control_user'))]"/>
+    </record>
+</odoo>
